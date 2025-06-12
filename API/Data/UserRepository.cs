@@ -20,16 +20,11 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     }
 
 
-    public async Task<IEnumerable<MemberDto>> GetMemberAsync()
+    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
     {
         return await context.Users
             .ProjectTo<MemberDto>(mapper.ConfigurationProvider)
             .ToListAsync();
-    }
-
-    public Task GetMembersAsync()
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<AppUser?> GetUserByIdAsync(int id)
@@ -58,10 +53,5 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
     public void Update(AppUser user)
     {
         context.Entry(user).State = EntityState.Modified;
-    }
-
-    Task<IEnumerable<MemberDto>> IUserRepository.GetMembersAsync()
-    {
-        throw new NotImplementedException();
     }
 }
