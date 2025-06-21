@@ -13,7 +13,7 @@ public class LogUserActivity : IAsyncActionFilter
 
         if (context.HttpContext.User.Identity?.IsAuthenticated != true) return;
 
-        var userId = resultContext.HttpContext.User.GetUserID();
+        var userId = resultContext.HttpContext.User.GetUserId();
 
         var repo = resultContext.HttpContext.RequestServices.GetRequiredService<IUserRepository>();
         var user = await repo.GetUserByIdAsync(userId);
